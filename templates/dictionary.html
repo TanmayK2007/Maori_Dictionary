@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block pageheading %}welcome{% endblock %}
+
+{% block main %}
+    {%  for word in words %}
+        <table>
+            <tr><strong>Maori: </strong>{{ word[0] }}</tr>
+            <tr><strong>English: </strong>{{ word[1] }}</tr>
+            <tr><strong>Category: </strong>{{ word[2] }}</tr>
+            <tr><strong>Definition: </strong>{{ word[3] }}</tr>
+            <tr><strong>Level: </strong>{{ word[4] }}</tr>
+        </table>
+    {% endfor %}
+{% endblock %}

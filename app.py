@@ -35,7 +35,23 @@ def is_logged_in():
 
 @app.route('/')
 def render_home():
-    return render_template('home.html')
+    message = request.args.get('message')
+    if message is None:
+        message = ""
+
+    return render_template('home.html', logged_in=is_logged_in(), message=message)
+
+
+@app.route('/dictionary')
+def render_dictionary():
+    con = create_connection(DATABASE)
+    query = "SELECT maori, english, category, definition, level FROM maori_words"
+    cur = con.cursor()
+    cur.execute(query)
+    word_list = cur.fetchall()
+    con.close()
+    print(word_list)
+    return render_template('dictionary.html', words=word_list, logged_in=is_logged_in())
 
 
 @app.route('/login', methods=['POST', 'GET'])
