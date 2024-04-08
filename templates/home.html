@@ -3,5 +3,34 @@
 {% block pageheading %}WELCOME!{% endblock %}
 
 {% block main %}
+        <form method="POST" action="/search">
+            <input type="text" name="search" id="search">
+            <input type="submit" value="Search">
+        </form>
 <strong><em>Want to learn Maori? You're at the right place.</em></strong>
+        <h3>Here's a Maori Dictionary which you can use as a resource to learn Maori!</h3>
+
+    <table>
+        <thead>
+        <tr>
+            <td> Maori</td>
+            <td> English</td>
+            <td> Category</td>
+            <td> Definition</td>
+            <td> Level</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for word in words %}
+        <tr>
+            <td>{{ word[0] }}</td>
+            <td>{{ word[1] }}</td>
+            <td>{{ word[2] }}</td>
+            <td>{{ word[3] }}</td>
+            <td>{{ word[4] }}</td>
+        </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
 {% endblock %}

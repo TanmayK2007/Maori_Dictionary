@@ -35,11 +35,18 @@ def is_logged_in():
 
 @app.route('/')
 def render_home():
+    con = create_connection(DATABASE)
+    query = "SELECT maori, english, category, definition, level FROM maori_words"
+    cur = con.cursor()
+    cur.execute(query)
+    word_list = cur.fetchall()
+    con.close()
+    print(word_list)
     message = request.args.get('message')
     if message is None:
         message = ""
 
-    return render_template('home.html', logged_in=is_logged_in(), message=message)
+    return render_template('home.html', logged_in=is_logged_in(), message=message, words=word_list)
 
 
 @app.route('/dictionary')
@@ -137,3 +144,18 @@ def logout():
     print(list(session.keys()))
     return redirect('/?message=See+you+next+time!')
 
+
+@app.route('/search', methods=['GET', 'POST'])
+def render_search():
+    search = request.form['search']
+    title = "Search for " + search
+    query = "SELECT maori, english, category, definition, level " \
+            "FROM maori_words WHERE maori like ? OR english like ? OR category like ? OR definition like ?" \
+            "OR level like ?"
+    search = "%" + search + "%"
+    con = create_connection(DATABASE)
+    cur = con.cursor()
+    cur.execute(query, (search, search, search, search, search))
+    words_list = cur.fetchall()
+    con.close()
+    return render_template("home.html", words=words_list, title=title)

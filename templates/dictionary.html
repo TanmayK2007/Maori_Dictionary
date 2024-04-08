@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 
-{% block pageheading %}welcome{% endblock %}
-
 {% block main %}
+        <div id="content">
     {%  for word in words %}
-        <table>
-            <tr><strong>Maori: </strong>{{ word[0] }}</tr>
-            <tr><strong>English: </strong>{{ word[1] }}</tr>
-            <tr><strong>Category: </strong>{{ word[2] }}</tr>
-            <tr><strong>Definition: </strong>{{ word[3] }}</tr>
-            <tr><strong>Level: </strong>{{ word[4] }}</tr>
-        </table>
+    <article class="content-item">
+        <p>Maori: {{ word[0] }}</p>
+        <p>English: {{ word[1] }}</p>
+        <p>Category: {{ word[2] }}</p>
+        <p>Definition: {{ word[3] }}</p>
+        <p>Level: {{ word[4] }}</p>
+    </article>
     {% endfor %}
+        </div>
 {% endblock %}
