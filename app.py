@@ -159,3 +159,37 @@ def render_search():
     words_list = cur.fetchall()
     con.close()
     return render_template("home.html", words=words_list, title=title)
+
+
+@app.route('/admin')
+def render_admin():
+    if not is_logged_in():
+        return redirect('/?message=Need+to+be+logged+in.')
+    con = create_connection(DATABASE)
+    query = "SELECT * FROM maori_words"
+    cur = con.cursor()
+    cur.execute(query)
+    word_list = cur.fetchall()
+    con.close()
+    return render_template("admin.html", logged_in=is_logged_in(), words=word_list)
+
+
+@app.route('/add_words', methods=['POST'])
+def add_words():
+    if not is_logged_in():
+        return redirect('/?message=Need+to+be+logged+in.')
+    if request.method == "POST":
+        print(request.form)
+        word = request.form.get('word').strip()
+        english = request.form.get('english').strip()
+        category = request.form.get('category').strip()
+        definition = request.form.get('definition')
+        level = request.form.get('level')
+        print(word, english, category, definition, level)
+        con = create_connection(DATABASE)
+        query = "INSERT INTO maori_words (maori, english, category, definition, level) VALUES (?, ?, ?, ?, ?)"
+        cur = con.cursor()
+        cur.execute(query, (word, english, category, definition, level))
+        con.commit()
+        con.close()
+        return redirect('/admin')
