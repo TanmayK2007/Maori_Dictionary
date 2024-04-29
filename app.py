@@ -56,9 +56,13 @@ def render_dictionary():
     cur = con.cursor()
     cur.execute(query)
     word_list = cur.fetchall()
+    query = "SELECT id, name FROM category"
+    cur = con.cursor()
+    cur.execute(query)
+    category_list = cur.fetchall()
     con.close()
     print(word_list)
-    return render_template('dictionary.html', words=word_list, logged_in=is_logged_in())
+    return render_template('dictionary.html', words=word_list, categories=category_list, logged_in=is_logged_in())
 
 
 @app.route('/categories/<cat_id>')

@@ -1,6 +1,13 @@
 {% extends "base.html" %}
 
 {% block main %}
+    <div class="container">
+        {% for category in categories %}
+        <li class="category-item">
+            <a href="/categories/{{ category[0] }}">{{ category[1] }}</a>
+        </li>
+        {% endfor %}
+    </div>
         <div id="content">
     {%  for word in words %}
     <article class="content-item">
