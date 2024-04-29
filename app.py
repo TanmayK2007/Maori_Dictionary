@@ -61,6 +61,23 @@ def render_dictionary():
     return render_template('dictionary.html', words=word_list, logged_in=is_logged_in())
 
 
+@app.route('/categories/<cat_id>')
+def render_categories(cat_id):  # put application's code here
+    title = cat_id
+    con = create_connection(DATABASE)
+    query = "SELECT * FROM maori_words WHERE cat_id=?"
+    cur = con.cursor()
+    cur.execute(query, (title, ))
+    words_list = cur.fetchall()
+    query = "SELECT id, name FROM category"
+    cur = con.cursor()
+    cur.execute(query)
+    category_list = cur.fetchall()
+    con.close()
+    print(words_list)
+    return render_template("categories.html", wor=words_list, categories=category_list, title=title, logged_in=is_logged_in())
+
+
 @app.route('/login', methods=['POST', 'GET'])
 def render_login():
     if is_logged_in():
@@ -70,7 +87,7 @@ def render_login():
         email = request.form['email'].strip().lower()
         password = request.form['password'].strip()
         print(email)
-        query = """SELECT id, fname, password FROM user WHERE email = ?"""
+        query = """SELECT user_id, fname, password FROM user WHERE email = ?"""
         con = create_connection(DATABASE)
         cur = con.cursor()
         cur.execute(query, (email,))
@@ -193,3 +210,17 @@ def add_words():
         con.commit()
         con.close()
         return redirect('/admin')
+
+
+@app.route('/delete_words', methods=['POST'])
+def render_delete_words():
+    if not is_logged_in():
+        return redirect('/?message=Need+to+be+logged+in.')
+    if request.method == "POST":
+        category = request.form.get('')
+        print(category)
+        category = category.split(", ")
+        cat_id = category[0]
+        cat_name = category[1]
+        return render_template("delete_confirm.html", id=cat_id, name=cat_name, type="category")
+    return redirect("/admin")
