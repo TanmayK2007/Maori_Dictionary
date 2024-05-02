@@ -36,7 +36,8 @@ def is_logged_in():
 @app.route('/')
 def render_home():
     con = create_connection(DATABASE)
-    query = "SELECT maori, english, category, definition, level FROM maori_words"
+    query = "SELECT maori, english, category_name, definition, level FROM maori_words m INNER JOIN category c ON " \
+            "m.cat_id_fk = c.cat_id"
     cur = con.cursor()
     cur.execute(query)
     word_list = cur.fetchall()
@@ -52,16 +53,17 @@ def render_home():
 @app.route('/dictionary')
 def render_dictionary():
     con = create_connection(DATABASE)
-    query = "SELECT maori, english, category, definition, level FROM maori_words"
+    query = "SELECT maori, english, category_name, definition, level FROM maori_words m INNER JOIN category c ON " \
+            "m.cat_id_fk = c.cat_id"
     cur = con.cursor()
     cur.execute(query)
     word_list = cur.fetchall()
-    query = "SELECT id, name FROM category"
+    query = "SELECT cat_id, name FROM category"
     cur = con.cursor()
     cur.execute(query)
     category_list = cur.fetchall()
     con.close()
-    print(word_list)
+    print(f'word_list = {word_list}')
     return render_template('dictionary.html', words=word_list, categories=category_list, logged_in=is_logged_in())
 
 
@@ -69,11 +71,11 @@ def render_dictionary():
 def render_categories(cat_id):  # put application's code here
     title = cat_id
     con = create_connection(DATABASE)
-    query = "SELECT * FROM maori_words WHERE cat_id=?"
+    query = "SELECT * FROM maori_words WHERE cat_id_fk=?"
     cur = con.cursor()
     cur.execute(query, (title, ))
     words_list = cur.fetchall()
-    query = "SELECT id, name FROM category"
+    query = "SELECT cat_id, name FROM category"
     cur = con.cursor()
     cur.execute(query)
     category_list = cur.fetchall()
@@ -102,10 +104,15 @@ def render_login():
         # would be better to find out how to see if the query return an empty result set
         if user_data is None:
             return redirect("/login?error=Email+invalid+password+incorrect")
+        try:
 
-        user_id = user_data[0][0]
-        first_name = user_data[0][1]
-        db_password = user_data[0][2]
+            user_id = user_data[0][0]
+            first_name = user_data[0][1]
+            db_password = user_data[0][2]
+        except IndexError:
+            return redirect("/login?error=Email+invalid+password+incorrect")
+
+
 
         # check if the password is incorrect for that email address
 
