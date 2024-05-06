@@ -58,7 +58,7 @@ def render_dictionary():
     cur = con.cursor()
     cur.execute(query)
     word_list = cur.fetchall()
-    query = "SELECT cat_id, name FROM category"
+    query = "SELECT cat_id, category_name FROM category"
     cur = con.cursor()
     cur.execute(query)
     category_list = cur.fetchall()
@@ -71,11 +71,12 @@ def render_dictionary():
 def render_categories(cat_id):  # put application's code here
     title = cat_id
     con = create_connection(DATABASE)
-    query = "SELECT * FROM maori_words WHERE cat_id_fk=?"
+    query = "SELECT maori, english, category_name, definition, level FROM maori_words m " \
+            "INNER JOIN category c ON m.cat_id_fk = c.cat_id WHERE cat_id_fk=? "
     cur = con.cursor()
     cur.execute(query, (title, ))
     words_list = cur.fetchall()
-    query = "SELECT cat_id, name FROM category"
+    query = "SELECT cat_id, category_name FROM category"
     cur = con.cursor()
     cur.execute(query)
     category_list = cur.fetchall()
