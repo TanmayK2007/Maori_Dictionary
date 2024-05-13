@@ -4,33 +4,64 @@
 
 {% block main %}
 
-<h4>Add words</h4>
-<form class="myform" method="post" action="/add_words">
-    <div class="form-group">
-        <div class="form-label"><label for="maori">Word in Maori:</label></div>
-        <div class="form-element"><input type="text" name="maori" id="maori" required></div>
-    </div>
-    <div class="form-group">
-        <div class="form-label"><label for="english">Word in English:</label></div>
-        <div class="form-element"><input type="text" name="english" id="english" required></div>
-    </div>
-    <div class="form-group">
-        <div class="form-label"><label for="category">Category of the word:</label></div>
-        <div class="form-element"><input type="text" name="category" id="category" required></div>
-    </div>
-    <div class="form-group">
-        <div class="form-label"><label for="definition">Definition of the word:</label></div>
-        <div class="form-element"><input type="text" name="definition" id="definition" required></div>
-    </div>
-    <div class="form-group">
-        <div class="form-label"><label for="level">Level encountered:</label></div>
-        <div class="form-element"><input type="text" name="level" id="level" required></div>
-    </div>
-    <div class="form-group">
-        <div class="form-label"></div>
-        <div class="form-element"><input type="submit" value="Add Word"></div>
-    </div>
-</form>
+    <h4>Add words</h4>
+    <form class="myform" method="post" action="/add_words">
 
+        <div class="form-group">
+            <div class="form-label"><label for="maori">Word in Maori:</label></div>
+            <div class="form-element"><input type="text" name="maori" id="maori" required></div>
+        </div>
 
+        <div class="form-group">
+            <div class="form-label"><label for="english">Word in English:</label></div>
+            <div class="form-element"><input type="text" name="english" id="english" required></div>
+        </div>
+
+        <div class="form-group">
+            <div class="dropdown">
+                <div class="form-label"><label for="cat_id_fk">Category of the word:</label></div>
+                <div class="form-element">
+                    <select id="category" name="category">
+                        {% for category in categories %}
+                            <option value="{{ category[0] }}">{{ category[1] }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-label"><label for="definition">Definition of the word:</label></div>
+            <div class="form-element"><input type="text" name="definition" id="definition" required></div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-label"><label for="level">Level encountered:</label></div>
+            <div class="form-element"><input type="number" name="level" id="level" min="1" max="10" required></div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-label"></div>
+            <div class="form-element"><input type="submit" value="Add Word"></div>
+        </div>
+
+    </form>
+
+    <h4>Delete a word</h4>
+    <form class="myform" method="post" action="/delete_words">
+        <div class="form-group">
+            <div class="form-label"><label for="name">Word:</label></div>
+            <div class="form-element">
+                <select id="word_id" name="word_id">
+                    {% for word in words %}
+                        <option value="{{ word[0] }}, {{ word[1] }}">{{ word[0] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-label"></div>
+            <div class="form-element"><input type="submit" value="Delete Word"></div>
+        </div>
+    </form>
 {% endblock %}

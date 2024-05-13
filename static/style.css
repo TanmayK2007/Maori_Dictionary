@@ -148,7 +148,7 @@ input{
 }
 
 .dropdown {
-  position: relative;
+  padding: 10px;
   display: inline-block;
 }
 

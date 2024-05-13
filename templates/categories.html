@@ -3,7 +3,7 @@
 {% block main %}
 
 <div class="dropdown">
-  <button class="dropbtn">Categories</button>
+  <button class="dropbtn">Categories ▼</button>
   <div class="dropdown-content">
     {% for category in categories %}
     <a href="/categories/{{ category[0] }}">{{ category[1] }}</a>
@@ -19,6 +19,8 @@
         <p>Category: {{ wo[2] }}</p>
         <p>Definition: {{ wo[3] }}</p>
         <p>Level: {{ wo[4] }}</p>
+        <p>Date Added: {{ wo[5] }}</p>
+
     </article>
     {% endfor %}
 </div>

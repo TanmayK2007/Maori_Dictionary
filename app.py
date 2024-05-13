@@ -2,7 +2,7 @@ from flask import Flask, render_template, redirect, request, session
 import sqlite3
 from sqlite3 import Error
 from flask_bcrypt import Bcrypt
-
+from datetime import datetime
 DATABASE = "C:/Users/22452/OneDrive - Wellington College/13DTS/Maori Dictionary/maori_dictionary"
 
 app = Flask(__name__)
@@ -33,10 +33,19 @@ def is_logged_in():
         return True
 
 
+def is_teacher():
+    if session.get("type") is None:
+        print("Not Teacher")
+        return False
+    else:
+        print("Is Teacher")
+        return True
+
+
 @app.route('/')
 def render_home():
     con = create_connection(DATABASE)
-    query = "SELECT maori, english, category_name, definition, level FROM maori_words m INNER JOIN category c ON " \
+    query = "SELECT maori, english, category_name, definition, level, date_added FROM maori_words m INNER JOIN category c ON " \
             "m.cat_id_fk = c.cat_id"
     cur = con.cursor()
     cur.execute(query)
@@ -47,13 +56,13 @@ def render_home():
     if message is None:
         message = ""
 
-    return render_template('home.html', logged_in=is_logged_in(), message=message, words=word_list)
+    return render_template('home.html', logged_in=is_logged_in(), message=message, words=word_list, teacher=is_teacher())
 
 
 @app.route('/dictionary')
 def render_dictionary():
     con = create_connection(DATABASE)
-    query = "SELECT maori, english, category_name, definition, level FROM maori_words m INNER JOIN category c ON " \
+    query = "SELECT maori, english, category_name, definition, level, date_added FROM maori_words m INNER JOIN category c ON " \
             "m.cat_id_fk = c.cat_id"
     cur = con.cursor()
     cur.execute(query)
@@ -63,15 +72,14 @@ def render_dictionary():
     cur.execute(query)
     category_list = cur.fetchall()
     con.close()
-    print(f'word_list = {word_list}')
-    return render_template('dictionary.html', words=word_list, categories=category_list, logged_in=is_logged_in())
+    return render_template('dictionary.html', words=word_list, categories=category_list, logged_in=is_logged_in(), teacher=is_teacher())
 
 
 @app.route('/categories/<cat_id>')
 def render_categories(cat_id):  # put application's code here
     title = cat_id
     con = create_connection(DATABASE)
-    query = "SELECT maori, english, category_name, definition, level FROM maori_words m " \
+    query = "SELECT maori, english, category_name, definition, level, date_added FROM maori_words m " \
             "INNER JOIN category c ON m.cat_id_fk = c.cat_id WHERE cat_id_fk=? "
     cur = con.cursor()
     cur.execute(query, (title, ))
@@ -82,7 +90,7 @@ def render_categories(cat_id):  # put application's code here
     category_list = cur.fetchall()
     con.close()
     print(words_list)
-    return render_template("categories.html", wor=words_list, categories=category_list, title=title, logged_in=is_logged_in())
+    return render_template("categories.html", wor=words_list, categories=category_list, title=title, logged_in=is_logged_in(), teacher=is_teacher())
 
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -94,7 +102,7 @@ def render_login():
         email = request.form['email'].strip().lower()
         password = request.form['password'].strip()
         print(email)
-        query = """SELECT user_id, fname, password FROM user WHERE email = ?"""
+        query = """SELECT user_id, fname, password, type FROM user WHERE email = ?"""
         con = create_connection(DATABASE)
         cur = con.cursor()
         cur.execute(query, (email,))
@@ -110,6 +118,7 @@ def render_login():
             user_id = user_data[0][0]
             first_name = user_data[0][1]
             db_password = user_data[0][2]
+            user_type = user_data[0][3]
         except IndexError:
             return redirect("/login?error=Email+invalid+password+incorrect")
 
@@ -123,10 +132,11 @@ def render_login():
         session['email'] = email
         session['user_id'] = user_id
         session['firstname'] = first_name
+        session['type'] = user_type
 
         print(session)
         return redirect('/')
-    return render_template('login.html', logged_in=is_logged_in())
+    return render_template('login.html', logged_in=is_logged_in(), teacher=is_teacher())
 
 
 @app.route('/signup', methods=['POST', 'GET'])
@@ -140,6 +150,7 @@ def render_signup():
         email = request.form.get('email').lower().strip()
         password = request.form.get('password')
         password2 = request.form.get('password2')
+        teacher = request.form.get('teacher')
 
         if password != password2:
             return redirect("\signup?error=Passwords+do+not+match")
@@ -149,11 +160,11 @@ def render_signup():
 
         hashed_password = bcrypt.generate_password_hash(password)
         con = create_connection(DATABASE)
-        query = "INSERT INTO user (fname, lname, email, password) VALUES (?, ?, ?, ?)"
+        query = "INSERT INTO user (fname, lname, email, password, type) VALUES (?, ?, ?, ?, ?)"
         cur = con.cursor()
 
         try:
-            cur.execute(query, (fname, lname, email, hashed_password))
+            cur.execute(query, (fname, lname, email, hashed_password, teacher))
         except sqlite3.IntegrityError:
             con.close()
             return redirect('\signup?error=Email+is+already+used')
@@ -163,7 +174,7 @@ def render_signup():
 
         return redirect("\login")
 
-    return render_template('signup.html', logged_in=is_logged_in())
+    return render_template('signup.html', logged_in=is_logged_in(), teacher=is_teacher())
 
 
 @app.route('/logout')
@@ -187,52 +198,82 @@ def render_search():
     cur.execute(query, (search, search, search, search, search))
     words_list = cur.fetchall()
     con.close()
-    return render_template("home.html", words=words_list, title=title)
+    return render_template("home.html", words=words_list, title=title, teacher=is_teacher())
 
 
 @app.route('/admin')
 def render_admin():
     if not is_logged_in():
         return redirect('/?message=Need+to+be+logged+in.')
+    if not is_teacher():
+        return redirect('/?message=Need+to+be+teacher.')
+
     con = create_connection(DATABASE)
     query = "SELECT * FROM maori_words"
     cur = con.cursor()
     cur.execute(query)
     word_list = cur.fetchall()
     con.close()
-    return render_template("admin.html", logged_in=is_logged_in(), words=word_list)
+    con = create_connection(DATABASE)
+    query = "SELECT * FROM category"
+    cur = con.cursor()
+    cur.execute(query)
+    category = cur.fetchall()
+    con.close()
+    print(category)
+    return render_template("admin.html", logged_in=is_logged_in(), categories=category, words=word_list, teacher=is_teacher())
 
 
 @app.route('/add_words', methods=['POST'])
 def add_words():
     if not is_logged_in():
         return redirect('/?message=Need+to+be+logged+in.')
+    if not is_teacher():
+        return redirect('/?message=Need+to+be+teacher.')
     if request.method == "POST":
         print(request.form)
-        maori = request.form.get('maori').title().strip()
-        english = request.form.get('english').title().strip()
-        category = request.form.get('category').title().strip()
-        definition = request.form.get('definition').title().strip()
+        maori = request.form.get('maori').capitalize().strip()
+        english = request.form.get('english').capitalize().strip()
+        category = request.form.get('category').capitalize().strip()
+        definition = request.form.get('definition').capitalize().strip()
         level = request.form.get('level').strip()
-        print(maori, english, category, definition, level)
+        date_added = datetime.today().strftime('%d-%m-%Y')
+        print(maori, english, category, definition, level, date_added)
         con = create_connection(DATABASE)
-        query = "INSERT INTO maori_words (maori, english, category, definition, level) VALUES (?, ?, ?, ?, ?)"
+        query = "INSERT INTO maori_words (maori, english, cat_id_fk, definition, level, date_added) VALUES (?, ?, ?, ?, ?, ?)"
         cur = con.cursor()
-        cur.execute(query, (maori, english, category, definition, level))
+        cur.execute(query, (maori, english, category, definition, level, date_added))
         con.commit()
         con.close()
-        return redirect('/admin')
+    return redirect('/admin')
 
 
 @app.route('/delete_words', methods=['POST'])
 def render_delete_words():
     if not is_logged_in():
         return redirect('/?message=Need+to+be+logged+in.')
+    if not is_teacher():
+        return redirect('/?message=Need+to+be+teacher.')
     if request.method == "POST":
-        category = request.form.get('')
-        print(category)
-        category = category.split(", ")
-        cat_id = category[0]
-        cat_name = category[1]
-        return render_template("delete_confirm.html", id=cat_id, name=cat_name, type="category")
+        words = request.form.get('word_id')
+        print(words)
+        words = words.split(", ")
+        words_id = words[0]
+        words_name = words[1]
+        return render_template("delete_confirm.html", id=words_id, name=words_name, type="word", logged_in=is_logged_in(), teacher=is_teacher())
     return redirect("/admin")
+
+
+@app.route('/delete_word_confirm/<word_id>')
+def delete_words_confirm(word_id):
+    if not is_logged_in():
+        return redirect('/?message=Need+tobe+logged+in.')
+    if not is_teacher():
+        return redirect('/')
+    con = create_connection(DATABASE)
+    query = 'DELETE FROM maori_words WHERE word_id = ?'
+    cur = con.cursor()
+    cur.execute(query, (word_id,))
+    con.commit()
+    con.close()
+    return redirect('/admin')
