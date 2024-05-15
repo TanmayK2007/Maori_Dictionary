@@ -11,16 +11,12 @@
   </div>
 </div>
 
-        <div id="content">
+<div id="content">
     {%  for word in words %}
     <article class="content-item">
-        <p>Maori: {{ word[0] }}</p>
+        <p><a href="/open_word_details/{{ word[2] }}">Maori: {{ word[0] }}</a></p>
         <p>English: {{ word[1] }}</p>
-        <p>Category: {{ word[2] }}</p>
-        <p>Definition: {{ word[3] }}</p>
-        <p>Level: {{ word[4] }}</p>
-        <p>Date Added: {{ word[5] }}</p>
     </article>
     {% endfor %}
-        </div>
+</div>
 {% endblock %}

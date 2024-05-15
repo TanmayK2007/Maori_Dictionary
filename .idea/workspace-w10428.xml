@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2cd27ed7-27c5-4ae9-b9c6-937a609c8fcd" name="Changes" comment="Did some css cleanups today and made the site more presentable, decent amount of work done.">
+      <change beforePath="$PROJECT_DIR$/static/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/style.css" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Flask Main" />
+        <option value="CSS File" />
+        <option value="Python Script" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/app.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/static/style.css" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/templates/base.html" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2e9brZPc3rmbxgA7mn6p4U4nPVw" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/22452/OneDrive - Wellington College/13DTS/Maori Dictionary&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;sqlite&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\22452\OneDrive - Wellington College\13DTS\Maori Dictionary\venv" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Maori Dictionary" type="Python.FlaskServer">
+      <module name="Maori Dictionary" />
+      <option name="target" value="$PROJECT_DIR$/app.py" />
+      <option name="targetType" value="PATH" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="Python.FlaskServer">
+      <module name="Maori Dictionary" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="C:\Users\22452\PycharmProjects\pythonProject\venv\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2cd27ed7-27c5-4ae9-b9c6-937a609c8fcd" name="Changes" comment="" />
+      <created>1711319940759</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1711319940759</updated>
+      <workItem from="1711319959631" duration="1299000" />
+      <workItem from="1711401481037" duration="3118000" />
+      <workItem from="1711502759918" duration="2969000" />
+      <workItem from="1712107535073" duration="2846000" />
+      <workItem from="1712189519633" duration="3795000" />
+      <workItem from="1712532865687" duration="5469000" />
+      <workItem from="1712614690973" duration="3164000" />
+      <workItem from="1712620433281" duration="357000" />
+      <workItem from="1712623003275" duration="2692000" />
+      <workItem from="1712628190690" duration="925000" />
+      <workItem from="1712697291049" duration="285000" />
+      <workItem from="1712710937809" duration="1190000" />
+      <workItem from="1712796657354" duration="3976000" />
+      <workItem from="1713167156407" duration="1049000" />
+      <workItem from="1713168235150" duration="1775000" />
+      <workItem from="1713170702858" duration="649000" />
+      <workItem from="1713171574638" duration="463000" />
+      <workItem from="1713306951890" duration="6578000" />
+      <workItem from="1714347459737" duration="2759000" />
+      <workItem from="1714428897604" duration="3290000" />
+      <workItem from="1714439052928" duration="1166000" />
+      <workItem from="1714525475084" duration="1012000" />
+      <workItem from="1714613415881" duration="3039000" />
+      <workItem from="1714952200672" duration="3232000" />
+      <workItem from="1714956784832" duration="1471000" />
+    </task>
+    <task id="LOCAL-00001" summary="test">
+      <created>1711404693005</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1711404693005</updated>
+    </task>
+    <task id="LOCAL-00002" summary="test">
+      <created>1711404699534</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1711404699534</updated>
+    </task>
+    <task id="LOCAL-00003" summary="day 1 work, got a lot of work done today, pretty proud of it.">
+      <created>1711505726136</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1711505726136</updated>
+    </task>
+    <task id="LOCAL-00004" summary="day 2 work, got my words to come up in dictionary.html">
+      <created>1712193668402</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1712193668402</updated>
+    </task>
+    <task id="LOCAL-00005" summary="day 3 work, got my words displaying nice and clean. I'm REALLY happy with the amount of work I have done today.">
+      <created>1712538743826</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1712538743826</updated>
+    </task>
+    <task id="LOCAL-00006" summary="day 4 work, I'm currently working on the adding words feature, I would say I am a quarter of the way through.">
+      <created>1712617904688</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1712617904688</updated>
+    </task>
+    <task id="LOCAL-00007" summary="day 4 part 2(lunch) work- Add words function works now. Next thing to do is making a teacher login.">
+      <created>1712625698835</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1712625698835</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Got my categories set up, very productive class.">
+      <created>1714350768707</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1714350768707</updated>
+    </task>
+    <task id="LOCAL-00009" summary="I removed the category tab from the website, and put its functionality in the dictionary tab, since it was being redundant and confusing for the end user.">
+      <created>1714432190247</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1714432190247</updated>
+    </task>
+    <task id="LOCAL-00010" summary="i got one foreign key working good">
+      <created>1714616458198</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1714616458198</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Did some css cleanups today and made the site more presentable, decent amount of work done.">
+      <created>1714955420280</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1714955420280</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="test" />
+    <MESSAGE value="day 1 work, got a lot of work done today, pretty proud of it." />
+    <MESSAGE value="day 2 work, got my words to come up in dictionary.html" />
+    <MESSAGE value="day 3 work, got my words displaying nice and clean. I'm REALLY happy with the amount of work I have done today." />
+    <MESSAGE value="day 4 work, I'm currently working on the adding words feature, I would say I am a quarter of the way through." />
+    <MESSAGE value="day 4 part 2(lunch) work- Add words function works now. Next thing to do is making a teacher login." />
+    <MESSAGE value="Got my categories set up, very productive class." />
+    <MESSAGE value="I removed the category tab from the website, and put its functionality in the dictionary tab, since it was being redundant and confusing for the end user." />
+    <MESSAGE value="i got one foreign key working good" />
+    <MESSAGE value="Did some css cleanups today and made the site more presentable, decent amount of work done." />
+    <option name="LAST_COMMIT_MESSAGE" value="Did some css cleanups today and made the site more presentable, decent amount of work done." />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Maori_Dictionary$Maori_Dictionary.coverage" NAME="Maori Dictionary Coverage Results" MODIFIED="1714957549176" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Maori_Dictionary$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1712620756689" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/Maori_Dictionary$Flask.coverage" NAME="Flask Coverage Results" MODIFIED="1713171199054" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/Maori_Dictionary$app.coverage" NAME="app Coverage Results" MODIFIED="1713169624736" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>

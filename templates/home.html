@@ -7,7 +7,7 @@
             <input type="text" name="search" id="search">
             <input type="submit" value="Search">
         </form>
-<strong><em>Want to learn Maori? You're at the right place.</em></strong>
+<strong>Want to learn Maori? You're at the right place.</strong>
         <h3>Here's a Maori Dictionary which you can use as a resource to learn Maori!</h3>
 
     <table>
@@ -24,7 +24,7 @@
         <tbody>
         {% for word in words %}
         <tr>
-            <td>{{ word[0] }}</td>
+            <td><a href="/open_word_details/{{ word[6] }}">{{ word[0] }}</a></td>
             <td>{{ word[1] }}</td>
             <td>{{ word[2] }}</td>
             <td>{{ word[3] }}</td>

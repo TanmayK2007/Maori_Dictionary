@@ -3,7 +3,7 @@
 {% block pageheading %}Confirm Delete{% endblock %}
 
 {% block main %}
-    <h3>Are you sure you want to delete the word {{ name }}?
-        <a href="/delete_{{ type }}_confirm/{{ id }}">Yes</a> /
+    <h3>Are you sure you want to delete the word {{ name }}? This action cannot be reversed.
+        <a href="/delete_word_confirm/{{ id }}">Yes</a> /
         <a href="/admin">No</a></h3>
 {% endblock %}

@@ -15,18 +15,18 @@
     <div class="container">
         <div class="navbar-brand">Maori Dictionary</div>
         <div class="navbar-links">
-            <a href="/">home</a>
-            <a href="/dictionary">dictionary</a>
+            <a href="/">Home</a>
+            <a href="/dictionary">Dictionary</a>
             {% if logged_in %}
-            <a href="/logout">logout</a>
+            <a href="/logout">Logout</a>
                 {% if teacher %}
                     <header> Teacher </header>
-                    <a href="/admin">admin</a>
+                    <a href="/admin">Admin</a>
                 {% else %}
                     <header> Student </header>
                 {% endif %}
             {% else %}
-            <a href="/login">login</a>
+            <a href="/login">Login</a>
             {% endif %}
         </div>
     </div>
