@@ -3,7 +3,8 @@ import sqlite3
 from sqlite3 import Error
 from flask_bcrypt import Bcrypt
 from datetime import datetime
-DATABASE = "C:/Users/khand.MSI/OneDrive - Wellington College/13DTS/Maori Dictionary/maori_dictionary"
+
+DATABASE = "C:/Users/22452/OneDrive - Wellington College/13DTS/Maori Dictionary/maori_dictionary"
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
@@ -45,8 +46,8 @@ def is_teacher():
 @app.route('/')
 def render_home():
     con = create_connection(DATABASE)
-    query = "SELECT maori, english, category_name, definition, level, date_added, word_id FROM maori_words m INNER JOIN category c ON " \
-            "m.cat_id_fk = c.cat_id"
+    query = "SELECT maori, english, category_name, definition, level, date_added, word_id FROM maori_words m" \
+            " INNER JOIN category c ON m.cat_id_fk = c.cat_id"
     cur = con.cursor()
     cur.execute(query)
     word_list = cur.fetchall()
@@ -56,17 +57,18 @@ def render_home():
     if message is None:
         message = ""
 
-    return render_template('home.html', logged_in=is_logged_in(), message=message, words=word_list, teacher=is_teacher())
+    return render_template('home.html', logged_in=is_logged_in(), message=message,
+                           words=word_list, teacher=is_teacher())
 
 
 @app.route('/open_word_details/<word_id>')
 def render_open_word_details(word_id):
     con = create_connection(DATABASE)
-    query = "SELECT maori, english, category_name, definition, level, date_added, fname, lname FROM maori_words m " \
-            "INNER JOIN category c ON m.cat_id_fk = c.cat_id INNER JOIN user u ON m.user_id_fk = u.user_id WHERE " \
-            "word_id = ?"
+    query = "SELECT maori, english, category_name, definition, level, date_added, fname, lname, cat_id, images " \
+            "FROM maori_words m INNER JOIN category c ON m.cat_id_fk = c.cat_id INNER JOIN user u " \
+            "ON m.user_id_fk = u.user_id WHERE word_id = ?"
     cur = con.cursor()
-    cur.execute(query, (word_id, ))
+    cur.execute(query, (word_id,))
     words_list = cur.fetchall()
     con.close()
     print(words_list)
@@ -85,7 +87,8 @@ def render_dictionary():
     cur.execute(query)
     category_list = cur.fetchall()
     con.close()
-    return render_template('dictionary.html', words=word_list, categories=category_list, logged_in=is_logged_in(), teacher=is_teacher())
+    return render_template('dictionary.html', words=word_list, categories=category_list,
+                           logged_in=is_logged_in(), teacher=is_teacher())
 
 
 @app.route('/categories/<cat_id>')
@@ -95,7 +98,7 @@ def render_categories(cat_id):  # put application's code here
     query = "SELECT maori, english, word_id FROM maori_words m " \
             "INNER JOIN category c ON m.cat_id_fk = c.cat_id WHERE cat_id_fk=? "
     cur = con.cursor()
-    cur.execute(query, (title, ))
+    cur.execute(query, (title,))
     words_list = cur.fetchall()
     query = "SELECT cat_id, category_name FROM category"
     cur = con.cursor()
@@ -103,7 +106,8 @@ def render_categories(cat_id):  # put application's code here
     category_list = cur.fetchall()
     con.close()
     print(words_list)
-    return render_template("categories.html", words=words_list, categories=category_list, title=title, logged_in=is_logged_in(), teacher=is_teacher())
+    return render_template("categories.html", words=words_list, categories=category_list,
+                           title=title, logged_in=is_logged_in(), teacher=is_teacher())
 
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -134,11 +138,7 @@ def render_login():
             user_type = user_data[0][3]
         except IndexError:
             return redirect("/login?error=Email+invalid+password+incorrect")
-
-
-
         # check if the password is incorrect for that email address
-
         if not bcrypt.check_password_hash(db_password, password):
             return redirect(request.referrer + "?error=Email+invalid+or+password+incorrect")
 
@@ -166,10 +166,10 @@ def render_signup():
         teacher = request.form.get('teacher')
 
         if password != password2:
-            return redirect("\signup?error=Passwords+do+not+match")
+            return redirect("/signup?error=Passwords+do+not+match")
 
         if len(password) < 8:
-            return redirect("\signup?error=Password+must+be+at+least+8+characters")
+            return redirect("/signup?error=Password+must+be+at+least+8+characters")
 
         hashed_password = bcrypt.generate_password_hash(password)
         con = create_connection(DATABASE)
@@ -180,12 +180,12 @@ def render_signup():
             cur.execute(query, (fname, lname, email, hashed_password, teacher))
         except sqlite3.IntegrityError:
             con.close()
-            return redirect('\signup?error=Email+is+already+used')
+            return redirect('/signup?error=Email+is+already+used')
 
         con.commit()
         con.close()
 
-        return redirect("\login")
+        return redirect("/login")
 
     return render_template('signup.html', logged_in=is_logged_in(), teacher=is_teacher())
 
@@ -234,7 +234,8 @@ def render_admin():
     category = cur.fetchall()
     con.close()
     print(category)
-    return render_template("admin.html", logged_in=is_logged_in(), categories=category, words=word_list, teacher=is_teacher())
+    return render_template("admin.html", logged_in=is_logged_in(), categories=category, words=word_list,
+                           teacher=is_teacher())
 
 
 @app.route('/add_words', methods=['POST'])
@@ -252,9 +253,11 @@ def add_words():
         level = request.form.get('level').strip()
         date_added = datetime.today().strftime('%d-%m-%Y')
         word_added_by = session.get('user_id')
+        images = 'noimage'
         print(maori, english, category, definition, level, date_added)
         con = create_connection(DATABASE)
-        query = "INSERT INTO maori_words (maori, english, cat_id_fk, definition, level, date_added, user_id_fk) VALUES (?, ?, ?, ?, ?, ?, ?)"
+        query = "INSERT INTO maori_words (maori, english, cat_id_fk, definition, images" \
+                " level, date_added, user_id_fk) VALUES (?, ?, ?, ?, ?, ?, ?)"
         cur = con.cursor()
         cur.execute(query, (maori, english, category, definition, level, date_added, word_added_by))
         con.commit()
@@ -275,7 +278,7 @@ def add_category():
         con = create_connection(DATABASE)
         query = "INSERT INTO category ('category_name') VALUES (?)"
         cur = con.cursor()
-        cur.execute(query, (cat_name, ))
+        cur.execute(query, (cat_name,))
         con.commit()
         con.close()
         return redirect('/admin')
@@ -292,7 +295,8 @@ def render_delete_words():
         words = words.split(", ")
         words_id = words[0]
         words_name = words[1]
-        return render_template("delete_confirm.html", id=words_id, name=words_name, type="word", logged_in=is_logged_in(), teacher=is_teacher())
+        return render_template("delete_confirm.html", id=words_id, name=words_name, type="word",
+                               logged_in=is_logged_in(), teacher=is_teacher())
     return redirect("/admin")
 
 
@@ -306,10 +310,11 @@ def delete_word_confirm(word_id):
     con = create_connection(DATABASE)
     query = 'DELETE FROM maori_words WHERE word_id = ?'
     cur = con.cursor()
-    cur.execute(query, (word_id, ))
+    cur.execute(query, (word_id,))
     con.commit()
     con.close()
     return redirect('/admin')
+
 
 @app.route('/delete_category', methods=['POST'])
 def render_delete_category():
@@ -332,7 +337,7 @@ def delete_category_confirm(cat_id):
     con = create_connection(DATABASE)
     query = "DELETE FROM category WHERE cat_id = ?"
     cur = con.cursor()
-    cur.execute(query, (cat_id, ))
+    cur.execute(query, (cat_id,))
     con.commit()
     con.close()
     return redirect("/admin")
