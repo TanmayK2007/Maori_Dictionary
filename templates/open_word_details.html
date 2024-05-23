@@ -1,19 +1,25 @@
-{% extends "base.html" %}
+{% extends "base.html" %}  <!-- extends the base.html template, so that everything in base.html is transferred to this page, like the navigation heading bars. This is done to reduce redundancy -->
 
-{% block main %}
+{% block main %}  <!-- starts the main block -->
 
-        <div id="content">
-    {%  for word in words %}
-    <article class="content-item">
-        <p>Maori: {{ word[0] }}</p>
-        <p>English: {{ word[1] }}</p>
-        <p>Category: <a href="/categories/{{ word[8] }}">{{ word[2] }}</a></p>
-        <p>Definition: {{ word[3] }}</p>
-        <p>Level: {{ word[4] }}</p>
-        <p>Date Added: {{ word[5] }}</p>
-        <p>Word added by: {{ word[6] }} {{ word[7] }}</p>
-        <p><img src="/static/maori_dictionary_images/images/{{ word[9] }}.jpg"></p>
-    </article>
-    {% endfor %}
-        </div>
-{% endblock %}
+    <div id="content">  <!-- div for the content -->
+
+        {% for word in words %}  <!-- loop through each word in the list -->
+        <article class="content-item">  <!-- article for each word -->
+
+            <p><a href="/">Exit - Home</a></p>
+            <p>Maori: {{ word[0] }}</p>  <!-- display Maori word -->
+            <p>English: {{ word[1] }}</p>  <!-- display English translation -->
+            <p>Category: <a href="/categories/{{ word[8] }}">{{ word[2] }}</a></p>  <!-- display category with link to see all the words in that respective category -->
+            <p>Definition: {{ word[3] }}</p>  <!-- display definition of the word -->
+            <p>Level: {{ word[4] }}</p>  <!-- display level of difficulty -->
+            <p>Date Added: {{ word[5] }}</p>  <!-- display date of when the word was added -->
+            <p>Word added by: {{ word[6] }} {{ word[7] }}</p>  <!-- display the user who added the word -->
+            <p><img src="/static/maori_dictionary_images/images/{{ word[9] }}.jpg"></p>  <!-- display an image related to the word, if no image is there it shows a placeholder imaeg -->
+
+        </article>  <!-- end of article -->
+        {% endfor %}  <!-- end of for loop -->
+
+    </div>  <!-- end of content div -->
+
+{% endblock %}  <!-- ends the main block -->

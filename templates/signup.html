@@ -1,45 +1,47 @@
-{% extends "base.html" %}
+{% extends "base.html" %}  <!-- extends the base.html template -->
 
+{% block main %}  <!-- starts the main block for the form -->
 
-{% block main %}
-    <form class="dataForm" method="post">
-        <div class="form-group">
-            <div class="form-label"><label for="fname">First Name:</label></div>
-            <div class="form-element"><input type="text" name="fname" id="fname" required></div>
+    <form class="dataForm" method="post">  <!-- form for user data entry -->
+
+        <div class="form-group">  <!-- form group for first name input -->
+            <div class="form-label"><label for="fname">First Name:</label></div>  <!-- label for first name input -->
+            <div class="form-element"><input type="text" name="fname" id="fname" maxlength="30" required></div>  <!-- input field for first name, required for form validation -->
         </div>
 
-        <div class="form-group">
-            <div class="form-label"><label for="lname">Last Name:</label></div>
-            <div class="form-element"><input type="text" name="lname" id="lname" required></div>
+        <div class="form-group">  <!-- form group for last name input -->
+            <div class="form-label"><label for="lname">Last Name:</label></div>  <!-- label for last name input -->
+            <div class="form-element"><input type="text" name="lname" id="lname" maxlength="30" required></div>  <!-- input field for last name, required for form validation -->
         </div>
 
-        <div class="form-group">
-            <div class="form-label"><label for="email">Email Address:</label></div>
-            <div class="form-element"><input type="email" name="email" id="email" required></div>
+        <div class="form-group">  <!-- form group for email input -->
+            <div class="form-label"><label for="email">Email Address:</label></div>  <!-- label for email input -->
+            <div class="form-element"><input type="email" name="email" id="email" required></div>  <!-- input field for email, required for form validation -->
         </div>
 
-        <div class="form-group">
-            <div class="form-label"><label for="password">Password:</label></div>
-            <div class="form-element"><input type="password" name="password" id="password" required></div>
+        <div class="form-group">  <!-- form group for password input -->
+            <div class="form-label"><label for="password">Password:</label></div>  <!-- label for password input -->
+            <div class="form-element"><input type="password" name="password" id="password" required></div>  <!-- input field for password, required for form validation -->
         </div>
 
-        <div class="form-group">
-            <div class="form-label"><label for="password2">Confirm Password:</label></div>
-            <div class="form-element"><input type="password" name="password2" id="password2" required></div>
+        <div class="form-group">  <!-- form group for password confirmation input -->
+            <div class="form-label"><label for="password2">Confirm Password:</label></div>  <!-- label for password confirmation input -->
+            <div class="form-element"><input type="password" name="password2" id="password2" required></div>  <!-- input field for password confirmation, required for form validation -->
         </div>
 
-        <label for="teacher"></label><input type="checkbox" id="teacher" name="teacher" value="teacher">
-        <label for="type"> Teacher </label>
+        <label for="teacher"></label><input type="checkbox" id="teacher" name="teacher" value="teacher">  <!-- checkbox for teacher selection -->
+        <label for="type"> Teacher </label>  <!-- label for teacher checkbox -->
 
-        <div class="form-group">
+        <div class="form-group">  <!-- form group for reset button -->
             <div></div>
-            <div class="form-element"><input type="reset"></div>
+            <div class="form-element"><input type="reset"></div>  <!-- reset button to clear the form -->
         </div>
 
-        <div class="form-group">
+        <div class="form-group">  <!-- form group for submit button -->
             <div></div>
-            <div class="form-element"><input type="submit"></div>
+            <div class="form-element"><input type="submit"></div>  <!-- submit button to submit the form -->
         </div>
-    </form>
-{% endblock %}
 
+    </form>  <!-- end of form -->
+
+{% endblock %}  <!-- ends the main block -->

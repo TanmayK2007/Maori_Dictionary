@@ -6,7 +6,7 @@ from datetime import datetime
 # importing everything needed from external libraries
 
 # database file path
-DATABASE = "C:/Users/22452/OneDrive - Wellington College/13DTS/Maori Dictionary/maori_dictionary"
+DATABASE = "C:/Users/khand.MSI/OneDrive - Wellington College/13DTS/Maori Dictionary/maori_dictionary"
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)

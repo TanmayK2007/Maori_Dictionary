@@ -1,48 +1,49 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html>  <!-- declares the document type as HTML -->
 
-<head>
-    <meta charset="utf-8">
-    <title>Maori Dictionary</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"/>
-    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+<html>  <!-- start of the HTML document -->
+
+<head>  <!-- start of the head section -->
+    <meta charset="utf-8">  <!-- sets the character encoding to UTF-8 -->
+    <title>Maori Dictionary</title>  <!-- sets the title of the page -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">  <!-- sets the viewport for responsiveness -->
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;600;800&display=swap" rel="stylesheet">  <!-- links to Google Fonts for font styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"/>  <!-- links to Normalize.css for CSS reset -->
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">  <!-- links to the external stylesheet -->
 </head>
 
-<body>
-<nav>
-    <div class="container">
-        <div class="navbar-brand">Maori Dictionary</div>
-        <div class="navbar-links">
-            <a href="/">Home</a>
-            <a href="/dictionary">Dictionary</a>
-            {% if logged_in %}
-            <a href="/logout">Logout</a>
-                {% if teacher %}
-                    <header> Teacher </header>
-                    <a href="/admin">Admin</a>
-                {% else %}
-                    <header> Student </header>
-                {% endif %}
-            {% else %}
-            <a href="/login">Login</a>
+<body>  <!-- start of the body section -->
+<nav>  <!-- navigation bar  -->
+    <div class="container">  <!-- container for navigation elements -->
+        <div class="navbar-brand">Maori Dictionary</div>  <!-- shows Maori Dictionary on the top left -->
+        <div class="navbar-links">  <!-- links in the navigation bar -->
+            <a href="/">Home</a>  <!-- link to the home page -->
+            <a href="/dictionary">Dictionary</a>  <!-- link to the dictionary page -->
+            {% if logged_in %}  <!-- shows to users that are only logged in, to ensure robustness and privacy -->
+            <a href="/logout">Logout</a>  <!-- link to log out -->
+                {% if teacher %}  <!-- only users that are teachers can access these, to ensure robustness and privacy -->
+                    <header> Teacher </header>  <!-- heading for teacher section -->
+                    <a href="/admin">Admin</a>  <!-- link to the admin page -->
+                {% else %}  <!-- if you aren't a teacher, you are shown this -->
+                    <header> Student </header>  <!-- heading for student section -->
+                {% endif %} <!-- ending the if statement -->
+            {% else %}  <!-- if you aren't logged in, you are just shown /login instead of all the other cool features -->
+            <a href="/login">Login</a>  <!-- link to the login page -->
             {% endif %}
         </div>
     </div>
-
 </nav>
-<div class="container">
-    <header>
-        <h1>Maori Dictionary</h1>
-        <h2>{% block pageheading %}{% endblock %}</h2>
+
+<div class="container">  <!-- main content container -->
+    <header>  <!-- header section -->
+        <h1>Maori Dictionary</h1>  <!-- main heading -->
+        <h2>{% block pageheading %}{% endblock %}</h2>  <!-- sub-heading based on block content -->
     </header>
 
-    <main>
-        {% block main %}
-        {% endblock %}
+    <main>  <!-- main content section -->
+        {% block main %}  <!-- block for main content -->
+        {% endblock %}  <!-- end of block for main content -->
     </main>
 </div>
-</body>
+</body>  <!-- end of body section -->
 
-</html>
+</html>  <!-- end of HTML document -->

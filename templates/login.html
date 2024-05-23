@@ -1,19 +1,21 @@
-{% extends "base.html" %}
-{% block pageheading %}login{% endblock %}
-{% block main %}
-<form class="myform" method="POST">
-    <div class="form-group">
-        <div class="form-label">Email:</div>
-        <div class="form-element"><input type="email" name="email" id="email" required></div>
+{% extends "base.html" %}  <!-- extends the base.html template, so that everything in base.html is transferred to this page, like the navigation heading bars -->
+
+{% block pageheading %}login{% endblock %}  <!-- setting the page heading to "login" -->
+
+{% block main %}  <!-- start of the content block -->
+<form class="myform" method="POST">  <!-- form with class "myform" using the POST method -->
+    <div class="form-group">  <!-- group for email input -->
+        <div class="form-label">Email:</div>  <!-- label for email field -->
+        <div class="form-element"><input type="email" name="email" id="email" required></div>  <!-- email input, required obviously to prevent hackers -->
     </div>
-    <div class="form-group">
-        <div class="form-label">Password:</div>
-        <div class="form-element"><input type="password" name="password" id="password" required></div>
+    <div class="form-group">  <!-- group for password input -->
+        <div class="form-label">Password:</div>  <!-- label for password field -->
+        <div class="form-element"><input type="password" name="password" id="password" required></div>  <!-- password input, required obviously so that people can't sign in to random email addresses without entering a password-->
     </div>
-    <div class="form-group">
-        <div class="form-label"></div>
-        <div class="form-element"><input type="submit" value="Login"></div>
+    <div class="form-group">  <!-- group for submit button -->
+        <div class="form-label"></div>  <!-- empty label for alignment purposes -->
+        <div class="form-element"><input type="submit" value="Login"></div>  <!-- submit button with "Login" label -->
     </div>
 </form>
-<p><br><br><br>If you don't have an account yet, please <a href="/signup">sign up</a></p>
-{% endblock %}
+<p><br><br><br>If you don't have an account yet, please <a href="/signup">sign up</a></p>  <!-- link to signup page -->
+{% endblock %}  <!-- end of the content block -->

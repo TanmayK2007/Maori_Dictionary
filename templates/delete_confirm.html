@@ -1,9 +1,11 @@
-{% extends "base.html" %}
+{% extends "base.html" %}  <!-- extends the base.html template, so that everything in base.html is transferred to this page, like the navigation heading bars. This is done to reduce redundancy -->
 
-{% block pageheading %}Confirm Delete{% endblock %}
+{% block pageheading %}Confirm Delete{% endblock %}  <!-- sets the page heading -->
 
-{% block main %}
+{% block main %}  <!-- starts the main block -->
+
     <h3>Are you sure you want to delete the word {{ name }}? This action cannot be reversed.
-        <a href="/delete_word_confirm/{{ id }}">Yes</a> /
-        <a href="/admin">No</a></h3>
-{% endblock %}
+        <a href="/delete_word_confirm/{{ id }}">Yes</a> /  <!-- link to confirm deletion -->
+        <a href="/admin">No</a></h3>  <!-- link to cancel deletion, redirects to admin -->
+
+{% endblock %}  <!-- ends the main block -->

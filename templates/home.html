@@ -1,39 +1,37 @@
-{% extends "base.html" %}
+{% extends "base.html" %}  <!-- extends the base.html template, so that everything in base.html is transferred to this page, like the navigation heading bars -->
 
-{% block pageheading %}WELCOME!{% endblock %}
+{% block pageheading %}WELCOME!{% endblock %}  <!-- sets the page heading -->
 
 {% block main %}
-        <form method="POST" action="/search">
-            <input type="text" name="search" id="search">
-            <input type="submit" value="Search">
-        </form>
-<strong>Want to learn Maori? You're at the right place.</strong>
-        <h3>Here's a Maori Dictionary which you can use as a resource to learn Maori!</h3>
+    <form method="POST" action="/search">  <!-- search box, yay..! -->
+        <input type="text" name="search" id="search">  <!-- input field for search -->
+        <input type="submit" value="Search">  <!-- submit button for search -->
+    </form>
+    <strong>Want to learn Maori? You're at the right place.</strong>  <!-- message for learning Maori -->
+    <h3>Here's a Maori Dictionary which you can use as a resource to learn Maori!</h3>  <!-- heading for Maori Dictionary -->
 
     <table>
         <thead>
         <tr>
-            <td> Maori</td>
-            <td> English</td>
-            <td> Category</td>
-            <td> Definition</td>
-            <td> Level</td>
-            <td> Date Added</td>
+            <td> Maori</td>  <!-- table header for Maori -->
+            <td> English</td>  <!-- table header for English -->
+            <td> Category</td>  <!-- table header for Category -->
+            <td> Definition</td>  <!-- table header for Definition -->
+            <td> Level</td>  <!-- table header for Level -->
+            <td> Date Added</td>  <!-- table header for Date Added -->
         </tr>
         </thead>
         <tbody>
         {% for word in words %}
         <tr>
-            <td><a href="/open_word_details/{{ word[6] }}">{{ word[0] }}</a></td>
-            <td>{{ word[1] }}</td>
-            <td>{{ word[2] }}</td>
-            <td>{{ word[3] }}</td>
-            <td>{{ word[4] }}</td>
-            <td>{{ word[5] }}</td>
-
+            <td><a href="/open_word_details/{{ word[6] }}">{{ word[0] }}</a></td>  <!-- link to open word details in the maori word-->
+            <td>{{ word[1] }}</td>  <!-- displays English word -->
+            <td>{{ word[2] }}</td>  <!-- displays Category -->
+            <td>{{ word[3] }}</td>  <!-- displays Definition -->
+            <td>{{ word[4] }}</td>  <!-- displays Level -->
+            <td>{{ word[5] }}</td>  <!-- displays Date Added -->
         </tr>
-            {% endfor %}
+        {% endfor %}
         </tbody>
     </table>
-
-{% endblock %}
+{% endblock %} <!-- ends the main block -->

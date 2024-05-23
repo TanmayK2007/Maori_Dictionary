@@ -1,22 +1,22 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}  <!-- extends the base.html template, so that everything in base.html is transferred to this page, like the navigation heading bars -->
 
-{% block main %}
+{% block main %}  <!-- starts the main block -->
 
-<div class="dropdown">
-  <button class="dropbtn">Categories ▼</button>
-  <div class="dropdown-content">
-    {% for category in categories %}
-    <a href="/categories/{{ category[0] }}">{{ category[1] }}</a>
-    {% endfor %}
+<div class="dropdown">  <!-- dropdown box for categories, better than a list in my opinion -->
+  <button class="dropbtn">Categories ▼</button>  <!-- hover over to toggle dropdown box -->
+  <div class="dropdown-content">  <!-- dropdown box content -->
+    {% for category in categories %}  <!-- loop through categories for every category -->
+    <a href="/categories/{{ category[0] }}">{{ category[1] }}</a>  <!-- link to category page -->
+    {% endfor %}  <!-- end the for loop -->
   </div>
 </div>
 
-<div id="content">
-    {%  for word in words %}
-    <article class="content-item">
-        <p><a href="/open_word_details/{{ word[2] }}">Maori: {{ word[0] }}</a></p>
-        <p>English: {{ word[1] }}</p>
+<div id="content">  <!-- main content section -->
+    {%  for word in words %}  <!-- loop through words for each word -->
+    <article class="content-item">  <!-- article for each word -->
+        <a href="/open_word_details/{{ word[2] }}">Maori: {{ word[0] }}</a>  <!-- link to word details page -->
+        <p>English: {{ word[1] }}</p>  <!-- display English translation -->
     </article>
     {% endfor %}
 </div>
-{% endblock %}
+{% endblock %}  <!-- ends the main block -->

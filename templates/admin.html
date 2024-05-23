@@ -1,98 +1,98 @@
-{% extends "base.html" %}
+{% extends "base.html" %}  <!-- extends the base.html template, so that everything in base.html is transferred to this page, like the navigation heading bars -->
 
-{% block pageheading %}Teacher Administration{% endblock %}
+{% block pageheading %}Teacher Administration{% endblock %}  <!-- sets page heading -->
 
-{% block main %}
+{% block main %}  <!-- starts the block -->
 
-    <h4>Add words</h4>
-    <form class="myform" method="post" action="/add_words">
+    <h4>Add words</h4>  <!-- header for adding words -->
+    <form class="myform" method="post" action="/add_words">  <!-- form to add words, sends POST request to /add_words -->
 
-        <div class="form-group">
-            <div class="form-label"><label for="maori">Word in Maori:</label></div>
-            <div class="form-element"><input type="text" name="maori" id="maori" required></div>
+        <div class="form-group">  <!-- form group for Maori word input -->
+            <div class="form-label"><label for="maori">Word in Maori:</label></div>  <!-- label for Maori word input -->
+            <div class="form-element"><input type="text" name="maori" id="maori" maxlength="45" required></div>  <!-- input field for Maori word, maximum length has been set to 45 to ensure robustness, it is a boundary -->
         </div>
 
-        <div class="form-group">
-            <div class="form-label"><label for="english">Word in English:</label></div>
-            <div class="form-element"><input type="text" name="english" id="english" required></div>
+        <div class="form-group">  <!-- form group for English word input -->
+            <div class="form-label"><label for="english">Word in English:</label></div>  <!-- label for English word input -->
+            <div class="form-element"><input type="text" name="english" id="english" maxlength="45" required></div>  <!-- input field for English word, maximum length has been set to 45 to ensure robustness, it is a boundary -->
         </div>
 
-        <div class="form-group">
-            <div class="dropdown">
-                <div class="form-label"><label for="cat_id_fk">Category of the word:</label></div>
+        <div class="form-group">  <!-- form group for word category -->
+            <div class="dropdown">  <!-- dropdown box for selecting category, this is better than letting the user just add the word into whatever category they want -->
+                <div class="form-label"><label for="cat_id_fk">Category of the word:</label></div>  <!-- label for category dropdown box -->
                 <div class="form-element">
-                    <select id="category" name="category">
-                        {% for category in categories %}
-                            <option value="{{ category[0] }}">{{ category[1] }}</option>
-                        {% endfor %}
+                    <select id="category" name="category">  <!-- select element for category -->
+                        {% for category in categories %}  <!-- loop through categories and create an option for each category -->
+                            <option value="{{ category[0] }}">{{ category[1] }}</option>  <!-- option with category value and name -->
+                        {% endfor %} <!-- ending the for loop -->
                     </select>
                 </div>
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="form-label"><label for="definition">Definition of the word:</label></div>
-            <div class="form-element"><input type="text" name="definition" id="definition" required></div>
+        <div class="form-group">  <!-- form group for word definition -->
+            <div class="form-label"><label for="definition">Definition of the word:</label></div>  <!-- label for definition input -->
+            <div class="form-element"><input type="text" name="definition" id="definition" maxlength="100" required></div>  <!-- input field for word definition, maximum length has been set to 100 to ensure robustness, it is a boundary -->
         </div>
 
-        <div class="form-group">
-            <div class="form-label"><label for="level">Level encountered:</label></div>
-            <div class="form-element"><input type="number" name="level" id="level" min="1" max="10" required></div>
+        <div class="form-group">  <!-- form group for word level -->
+            <div class="form-label"><label for="level">Level encountered:</label></div>  <!-- label for level input -->
+            <div class="form-element"><input type="number" name="level" id="level" min="1" max="10" required></div>  <!-- input field for level, boundary with range 1-10, also not letting users input letters in -->
         </div>
 
-        <div class="form-group">
+        <div class="form-group">  <!-- form group for submit button -->
             <div class="form-label"></div>
-            <div class="form-element"><input type="submit" value="Add Word"></div>
+            <div class="form-element"><input type="submit" value="Add Word"></div>  <!-- submit button to add word -->
         </div>
 
     </form>
 
-    <h4>Delete a word</h4>
-    <form class="myform" method="post" action="/delete_word">
-        <div class="form-group">
-            <div class="form-label"><label for="name">Word:</label></div>
+    <h4>Delete a word</h4>  <!-- header for deleting a word -->
+    <form class="myform" method="post" action="/delete_word">  <!-- form to delete a word, sends POST request to /delete_word -->
+        <div class="form-group">  <!-- form group for selecting word to delete -->
+            <div class="form-label"><label for="name">Word:</label></div>  <!-- label for word dropdown -->
             <div class="form-element">
-                <select id="word_id" name="word_id">
-                    {% for word in words %}
-                        <option value="{{ word[4] }}, {{ word[1] }}">{{ word[0] }}</option>
+                <select id="word_id" name="word_id">  <!-- select element for word -->
+                    {% for word in words %}  <!-- loop through words and create an option for each word -->
+                        <option value="{{ word[4] }}, {{ word[1] }}">{{ word[0] }}</option>  <!-- option with word ID and name -->
                     {% endfor %}
                 </select>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group">  <!-- form group for submit button -->
             <div class="form-label"></div>
-            <div class="form-element"><input type="submit" value="Delete Word"></div>
+            <div class="form-element"><input type="submit" value="Delete Word"></div>  <!-- submit button to delete word -->
         </div>
     </form>
 
-    <h4>Add a category</h4>
-    <form class="myform" method="post" action="/add_category">
-        <div class="form-group">
-            <div class="form-label"><label for="category_name">Category Name:</label></div>
-            <div class="form-element"><input type="text" name="category_name" id="category_name" required></div>
+    <h4>Add a category</h4>  <!-- header for adding a category -->
+    <form class="myform" method="post" action="/add_category">  <!-- form to add a category, sends POST request to /add_category -->
+        <div class="form-group">  <!-- form group for category name input -->
+            <div class="form-label"><label for="category_name">Category Name:</label></div>  <!-- label for category name input -->
+            <div class="form-element"><input type="text" name="category_name" id="category_name" maxlength="100" required></div>  <!-- input field for category name -->
         </div>
-        <div class="form-group">
+        <div class="form-group">  <!-- form group for submit button -->
             <div class="form-label"></div>
-            <div class="form-element"><input type="submit" value="Add Category"></div>
+            <div class="form-element"><input type="submit" value="Add Category"></div>  <!-- submit button to add category -->
         </div>
     </form>
 
-    <h4>Delete a category</h4>
-    <form class="myform" method="post" action="/delete_category">
-        <div class="form-group">
-            <div class="form-label"><label for="category_name">Category Name:</label></div>
+    <h4>Delete a category</h4>  <!-- header for deleting a category -->
+    <form class="myform" method="post" action="/delete_category">  <!-- form to delete a category, sends POST request to /delete_category -->
+        <div class="form-group">  <!-- form group for selecting category to delete -->
+            <div class="form-label"><label for="category_name">Category Name:</label></div>  <!-- label for category dropdown -->
             <div class="form-element">
-                <select id="cat_id" name="cat_id">
-                    {% for category in categories %}
-                    <option value="{{ category[0] }}, {{ category[1] }}">{{ category[1] }}</option>
+                <select id="cat_id" name="cat_id">  <!-- select element for category -->
+                    {% for category in categories %}  <!-- loop through categories and create an option for each -->
+                    <option value="{{ category[0] }}, {{ category[1] }}">{{ category[1] }}</option>  <!-- option with category ID and name -->
                     {% endfor %}
                 </select>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group">  <!-- form group for submit button -->
             <div class="form-label"></div>
-            <div class="form-element"><input type="submit" value="Delete Category"></div>
+            <div class="form-element"><input type="submit" value="Delete Category"></div>  <!-- submit button to delete category -->
         </div>
     </form>
 
-{% endblock %}
+{% endblock %}  <!-- ends the block -->
